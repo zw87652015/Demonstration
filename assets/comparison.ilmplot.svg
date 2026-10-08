@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" width="311.811024pt" height="204.094488pt" viewBox="0 0 311.811024 204.094488" version="1.1">
+ <metadata id="ilm-plot-document">{"format":"ilm-plot","schema_version":1,"kind":"stacked_column","width_mm":110,"height_mm":72,"axes_rect":[0.16,0.19,0.8,0.69],"title":"Group comparison","xlabel":"","ylabel":"Response (a.u.)","font_family":"Arial","font_size_pt":10,"title_size_pt":12,"xlim":null,"ylim":[0.0,1.25],"legend":true,"legend_location":"upper left","grid":false,"series":[],"x_tick_labels":[[0.0,"Baseline"],[1.0,"Day 3"],[2.0,"Day 7"]],"categories":[{"id":"c0","label":"Reference","values":[0.34,0.41,0.49],"color":"#8A9AA5","yerr":[0.03,0.04,0.04]},{"id":"c1","label":"Condition A","values":[0.35,0.68,0.93],"color":"#0F8B8D","yerr":[0.03,0.05,0.06]},{"id":"c2","label":"Condition B","values":[0.34,0.55,0.76],"color":"#D58A42","yerr":[0.03,0.04,0.05]}],"stacked":{"percent":false,"grouped":true}}</metadata><metadata id="ilm-plot-worksheet">{"format":"ilm-plot-worksheet","schema_version":1,"chart":"column","plot_columns":[0,1,2,3,4,5,6],"columns":[{"designation":"Label","long_name":"Group","units":"","comments":"Illustrative data","values":["Baseline","Day 3","Day 7"]},{"designation":"Y","long_name":"Reference","units":"a.u.","comments":"Example mean","values":[0.34,0.41,0.49]},{"designation":"yErr","long_name":"Reference error","units":"a.u.","comments":"Example error","values":[0.03,0.04,0.04]},{"designation":"Y","long_name":"Condition A","units":"a.u.","comments":"Example mean","values":[0.35,0.68,0.93]},{"designation":"yErr","long_name":"Condition A error","units":"a.u.","comments":"Example error","values":[0.03,0.05,0.06]},{"designation":"Y","long_name":"Condition B","units":"a.u.","comments":"Example mean","values":[0.34,0.55,0.76]},{"designation":"yErr","long_name":"Condition B error","units":"a.u.","comments":"Example error","values":[0.03,0.04,0.05]}],"generator":"ILM 3.5.0"}</metadata><metadata>
+  <rdf:RDF>
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>ILM Plot Editor</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 204.094488  L 311.811024 204.094488  L 311.811024 0  L 0 0  z " style="fill: #ffffff" />
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 36.447323 185.597165  L 310.393701 185.597165  L 310.393701 16.057323  L 36.447323 16.057323  z " style="fill: #ffffff" />
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m3d4114a28e" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8" />
+      </defs>
+      <g>
+       <use xlink:href="#m3d4114a28e" x="97.324296" y="185.597165" style="stroke: #000000; stroke-width: 0.8" />
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="text-anchor: middle;font-size:128px" x="1245.7509888" y="2556.8637184" transform="rotate(-0 97.324296 199.754978) scale(0.078125)" font-family="Arial">Baseline</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m3d4114a28e" x="173.420512" y="185.597165" style="stroke: #000000; stroke-width: 0.8" />
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="text-anchor: middle;font-size:128px" x="2219.7825536" y="2557.243712" transform="rotate(-0 173.420512 199.784665) scale(0.078125)" font-family="Arial">Day 3</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#m3d4114a28e" x="249.516728" y="185.597165" style="stroke: #000000; stroke-width: 0.8" />
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="text-anchor: middle;font-size:128px" x="3193.8141184" y="2556.8637184" transform="rotate(-0 249.516728 199.754978) scale(0.078125)" font-family="Arial">Day 7</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_4">
+      <defs>
+       <path id="m6e87478484" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8" />
+      </defs>
+      <g>
+       <use xlink:href="#m6e87478484" x="36.447323" y="185.597165" style="stroke: #000000; stroke-width: 0.8" />
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="text-anchor: end;font-size:128px" x="376.9257344" y="2421.4537216" transform="rotate(-0 29.447323 189.176072) scale(0.078125)" font-family="Arial">0.0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m6e87478484" x="36.447323" y="158.470791" style="stroke: #000000; stroke-width: 0.8" />
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="text-anchor: end;font-size:128px" x="376.9257344" y="2074.2361216" transform="rotate(-0 29.447323 162.049697) scale(0.078125)" font-family="Arial">0.2</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m6e87478484" x="36.447323" y="131.344416" style="stroke: #000000; stroke-width: 0.8" />
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="text-anchor: end;font-size:128px" x="376.9257344" y="1727.0185216" transform="rotate(-0 29.447323 134.923322) scale(0.078125)" font-family="Arial">0.4</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m6e87478484" x="36.447323" y="104.218041" style="stroke: #000000; stroke-width: 0.8" />
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="text-anchor: end;font-size:128px" x="376.9257344" y="1379.8009216" transform="rotate(-0 29.447323 107.796947) scale(0.078125)" font-family="Arial">0.6</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m6e87478484" x="36.447323" y="77.091666" style="stroke: #000000; stroke-width: 0.8" />
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="text-anchor: end;font-size:128px" x="376.9257344" y="1032.5833216" transform="rotate(-0 29.447323 80.670572) scale(0.078125)" font-family="Arial">0.8</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#m6e87478484" x="36.447323" y="49.965291" style="stroke: #000000; stroke-width: 0.8" />
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="text-anchor: end;font-size:128px" x="376.9257344" y="685.3657344" transform="rotate(-0 29.447323 53.544198) scale(0.078125)" font-family="Arial">1.0</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m6e87478484" x="36.447323" y="22.838917" style="stroke: #000000; stroke-width: 0.8" />
+      </g>
+     </g>
+     <g id="text_10">
+      <text style="text-anchor: end;font-size:128px" x="376.9257344" y="338.1481344" transform="rotate(-0 29.447323 26.417823) scale(0.078125)" font-family="Arial">1.2</text>
+     </g>
+    </g>
+    <g id="ilmplot-ylabel">
+     <text style="text-anchor: middle;font-size:128px" x="120.865728" y="1290.5887232" transform="rotate(-90 9.442635 100.827244) scale(0.078125)" id="ilmplot-ylabel-text-0" font-family="Arial">Response (a.u.)</text>
+    </g>
+   </g>
+   <g id="ilmplot-stack-c0">
+    <path d="M 66.885809 185.597165  L 87.178134 185.597165  L 87.178134 139.482328  L 66.885809 139.482328  z " clip-path="url(#pec39e6218e)" style="fill: #8a9aa5" />
+   </g>
+   <g id="ilmplot-stack-c0">
+    <path d="M 142.982025 185.597165  L 163.27435 185.597165  L 163.27435 129.988097  L 142.982025 129.988097  z " clip-path="url(#pec39e6218e)" style="fill: #8a9aa5" />
+   </g>
+   <g id="ilmplot-stack-c0">
+    <path d="M 219.078241 185.597165  L 239.370566 185.597165  L 239.370566 119.137547  L 219.078241 119.137547  z " clip-path="url(#pec39e6218e)" style="fill: #8a9aa5" />
+   </g>
+   <g id="ilmplot-stack-c1">
+    <path d="M 87.178134 185.597165  L 107.470458 185.597165  L 107.470458 138.126009  L 87.178134 138.126009  z " clip-path="url(#pec39e6218e)" style="fill: #0f8b8d" />
+   </g>
+   <g id="ilmplot-stack-c1">
+    <path d="M 163.27435 185.597165  L 183.566674 185.597165  L 183.566674 93.367491  L 163.27435 93.367491  z " clip-path="url(#pec39e6218e)" style="fill: #0f8b8d" />
+   </g>
+   <g id="ilmplot-stack-c1">
+    <path d="M 239.370566 185.597165  L 259.66289 185.597165  L 259.66289 59.459523  L 239.370566 59.459523  z " clip-path="url(#pec39e6218e)" style="fill: #0f8b8d" />
+   </g>
+   <g id="ilmplot-stack-c2">
+    <path d="M 107.470458 185.597165  L 127.762782 185.597165  L 127.762782 139.482328  L 107.470458 139.482328  z " clip-path="url(#pec39e6218e)" style="fill: #d58a42" />
+   </g>
+   <g id="ilmplot-stack-c2">
+    <path d="M 183.566674 185.597165  L 203.858998 185.597165  L 203.858998 110.999635  L 183.566674 110.999635  z " clip-path="url(#pec39e6218e)" style="fill: #d58a42" />
+   </g>
+   <g id="ilmplot-stack-c2">
+    <path d="M 259.66289 185.597165  L 279.955214 185.597165  L 279.955214 82.516941  L 259.66289 82.516941  z " clip-path="url(#pec39e6218e)" style="fill: #d58a42" />
+   </g>
+   <g id="patch_3">
+    <path d="M 36.447323 185.597165  L 36.447323 16.057323  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square" />
+   </g>
+   <g id="patch_4">
+    <path d="M 310.393701 185.597165  L 310.393701 16.057323  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square" />
+   </g>
+   <g id="patch_5">
+    <path d="M 36.447323 185.597165  L 310.393701 185.597165  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square" />
+   </g>
+   <g id="patch_6">
+    <path d="M 36.447323 16.057323  L 310.393701 16.057323  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square" />
+   </g>
+   <g id="ilmplot-stack-c0">
+    <path d="M 77.031971 143.551284  L 77.031971 135.413372  " clip-path="url(#pec39e6218e)" style="fill: none; stroke: #000000; stroke-width: 1.5" />
+    <path d="M 153.128188 135.413372  L 153.128188 124.562822  " clip-path="url(#pec39e6218e)" style="fill: none; stroke: #000000; stroke-width: 1.5" />
+    <path d="M 229.224404 124.562822  L 229.224404 113.712272  " clip-path="url(#pec39e6218e)" style="fill: none; stroke: #000000; stroke-width: 1.5" />
+   </g>
+   <g id="ilmplot-stack-c1">
+    <path d="M 97.324296 142.194966  L 97.324296 134.057053  " clip-path="url(#pec39e6218e)" style="fill: none; stroke: #000000; stroke-width: 1.5" />
+    <path d="M 173.420512 100.149085  L 173.420512 86.585897  " clip-path="url(#pec39e6218e)" style="fill: none; stroke: #000000; stroke-width: 1.5" />
+    <path d="M 249.516728 67.597435  L 249.516728 51.32161  " clip-path="url(#pec39e6218e)" style="fill: none; stroke: #000000; stroke-width: 1.5" />
+   </g>
+   <g id="ilmplot-stack-c2">
+    <path d="M 117.61662 143.551284  L 117.61662 135.413372  " clip-path="url(#pec39e6218e)" style="fill: none; stroke: #000000; stroke-width: 1.5" />
+    <path d="M 193.712836 116.42491  L 193.712836 105.57436  " clip-path="url(#pec39e6218e)" style="fill: none; stroke: #000000; stroke-width: 1.5" />
+    <path d="M 269.809052 89.298535  L 269.809052 75.735347  " clip-path="url(#pec39e6218e)" style="fill: none; stroke: #000000; stroke-width: 1.5" />
+   </g>
+   <g id="ilmplot-title">
+    <text style="text-anchor: middle;font-size:128px" x="1849.81879467" y="107.278112" transform="rotate(-0 173.420512 10.057323) scale(0.09375)" id="ilmplot-title-text-0" font-family="Arial">Group comparison</text>
+   </g>
+   <g id="legend_1">
+    <g id="patch_7">
+     <path d="M 43.447323 66.49326  L 127.144198 66.49326  Q 129.144198 66.49326 129.144198 64.49326  L 129.144198 23.057323  Q 129.144198 21.057323 127.144198 21.057323  L 43.447323 21.057323  Q 41.447323 21.057323 41.447323 23.057323  L 41.447323 64.49326  Q 41.447323 66.49326 43.447323 66.49326  z " style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter" />
+    </g>
+    <g id="patch_8">
+     <path d="M 45.447323 32.215135  L 65.447323 32.215135  L 65.447323 25.215135  L 45.447323 25.215135  z " style="fill: #8a9aa5" />
+    </g>
+    <g id="text_11">
+     <text style="text-anchor: start;font-size:128px" x="940.1257344" y="412.353728" transform="rotate(-0 73.447323 32.215135) scale(0.078125)" font-family="Arial">Reference</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 45.447323 46.360448  L 65.447323 46.360448  L 65.447323 39.360448  L 45.447323 39.360448  z " style="fill: #0f8b8d" />
+    </g>
+    <g id="text_12">
+     <text style="text-anchor: start;font-size:128px" x="940.1257344" y="593.4137344" transform="rotate(-0 73.447323 46.360448) scale(0.078125)" font-family="Arial">Condition A</text>
+    </g>
+    <g id="patch_10">
+     <path d="M 45.447323 60.50576  L 65.447323 60.50576  L 65.447323 53.50576  L 45.447323 53.50576  z " style="fill: #d58a42" />
+    </g>
+    <g id="text_13">
+     <text style="text-anchor: start;font-size:128px" x="940.1257344" y="774.473728" transform="rotate(-0 73.447323 60.50576) scale(0.078125)" font-family="Arial">Condition B</text>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pec39e6218e">
+   <rect x="36.447323" y="16.057323" width="273.946378" height="169.539843" />
+  </clipPath>
+ </defs>
+</svg>
