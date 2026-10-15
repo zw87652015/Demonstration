@@ -317,7 +317,7 @@ param($hwnd)
 Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes
 if ([int64]$hwnd -eq 0) { $root = [System.Windows.Automation.AutomationElement]::RootElement }
 else { $root = [System.Windows.Automation.AutomationElement]::FromHandle([IntPtr]([int64]$hwnd)) }
-$types = @('Button','Edit','MenuItem','TabItem','Text','SplitButton','ComboBox','CheckBox','Pane','Custom','Group')
+$types = @('Button','Edit','MenuItem','TabItem','Text','SplitButton','ComboBox','CheckBox','Pane','Custom','Group','HeaderItem')
 $out = @()
 foreach ($t in $types) {
   $cond = New-Object System.Windows.Automation.PropertyCondition(
@@ -378,13 +378,43 @@ hot = {}
 
 
 def grab(hwnd, name, out_dir):
+    # Keep the physical resolution (2880x1620 at 150%): the demo zooms in
+    # up to ~2.2x, and a 1920-px frame turns soft at that scale. Hotspots
+    # stay in 1920x1080 stage coordinates; use stage_k() to index pixels.
     img = shot(hwnd)
-    img = img.resize((1920, 1080), __import__("PIL.Image",
-                                              fromlist=["Image"]).LANCZOS)
+    if img.size != (W_PHYS, H_PHYS):
+        img = img.resize((W_PHYS, H_PHYS), __import__(
+            "PIL.Image", fromlist=["Image"]).LANCZOS)
     p = os.path.join(out_dir, "%s.png" % name)
     img.save(p)
     PNG.append(p)
     print("  captured", name)
+
+
+def stage_k(arr):
+    """Pixels per 1920-wide stage unit for a saved frame array."""
+    return arr.shape[1] / 1920.0
+
+
+def x_axis_line(path, cell):
+    """Lowest long dark horizontal run inside a plot cell -> [y, x0, x1]
+    in stage coordinates (the plot's bottom spine), or None."""
+    import numpy as np
+    from PIL import Image
+    a = np.asarray(Image.open(path).convert("L"), dtype=np.int16)
+    k = stage_k(a)
+    x0, x1 = int(cell[0] * k), int((cell[0] + cell[2]) * k)
+    y0 = int(cell[1] * k)
+    y1 = min(a.shape[0], int((cell[1] + cell[3] + 60) * k))
+    best = None
+    for y in range(y0 + int(20 * k), y1):
+        dark = np.where(a[y, x0:x1] < 70)[0]
+        if len(dark) < (x1 - x0) * 0.3:
+            continue
+        for s, e in _runs(list(dark), min_w=int((x1 - x0) * 0.3)):
+            best = [int(round(y / k)), int(round((x0 + s) / k)),
+                    int(round((x0 + e) / k))]
+    return best
 
 
 def _runs(idx, min_w=4):
@@ -749,6 +779,12 @@ def main():
         if len(leaves) == 4:
             agent_call("cell_add", row_index=0)
             res, leaves = leaf_cells()
+        # a real file name in the title bar / tab instead of "Untitled"
+        demo_dir = os.path.join(tempfile.gettempdir(), "ILM-demo")
+        os.makedirs(demo_dir, exist_ok=True)
+        agent_call("project_save",
+                   path=os.path.join(demo_dir, "Figure 2.figpack"))
+        time.sleep(0.6)
         A, B, C, D, E = [c["id"] for c in leaves[:5]]
         print("  cells:", A, B, C, D, E)
 
@@ -872,13 +908,28 @@ def main():
             time.sleep(0.5)
         grab(hwnd, "09-cell-a-selected", out_dir)
 
-        r = agent_call("pip_add", cell_id=A, pip_type="zoom",
-                       x=0.58, y=0.05, w=0.38, h=0.42)
-        pip_id = r["result"]["pip_id"]
-        agent_call("pip_set_properties", pip_id=pip_id,
-                   crop_left=0.30, crop_top=0.55,
-                   crop_right=0.60, crop_bottom=0.92,
-                   show_origin_box=True)
+        # The GUI creates insets by dropping an image file on the cell's
+        # top-right Inset zone (MainWindow._on_pip_image_dropped): an
+        # external PiP at the default x/y, w=0.3, h from the image aspect.
+        # Zoom insets have no GUI trigger, so the demo must not show one.
+        from PIL import Image as _PILImage
+        detail = os.path.join(ASSETS, "river-detail.jpg")
+        if not os.path.isfile(detail):
+            src = _PILImage.open(os.path.join(ASSETS, "river.JPG")).convert("RGB")
+            W_, H_ = src.size
+            src.crop((round(W_ * .30), round(H_ * .55), round(W_ * .60),
+                      round(H_ * .92))).save(detail, quality=92)
+        dw, dh = _PILImage.open(detail).size
+        ca_ = cells_px.get("a") if cr else None
+        cell_aspect = (ca_[2] / ca_[3]) if ca_ else 1.7
+        pip_w = 0.3
+        pip_h = pip_w * cell_aspect / (dw / dh)
+        if pip_h > 0.6:
+            pip_w, pip_h = pip_w * 0.6 / pip_h, 0.6
+        PIP_RECT = (0.62, 0.05, pip_w, pip_h)
+        agent_call("pip_add", cell_id=A, pip_type="external",
+                   image_path=detail, x=PIP_RECT[0], y=PIP_RECT[1],
+                   w=PIP_RECT[2], h=PIP_RECT[3])
         time.sleep(0.4)
         # PiP item only rebuilds its crop on a full scene rebuild:
         # auto_layout is visually neutral here and forces it
@@ -905,24 +956,41 @@ def main():
         time.sleep(0.7)
         grab(hwnd, "12-reflow-on", out_dir)
 
+        # x-axis spines before/after Reflow drive the demo's guide lines
+        if cr:
+            for tag, fr in (("before", "11-plot-d-selected"),
+                            ("after", "12-reflow-on")):
+                for k_ in ("d", "e"):
+                    try:
+                        ln = x_axis_line(os.path.join(out_dir, fr + ".png"),
+                                         cells_px[k_])
+                    except Exception as e:
+                        ln = None
+                        print("  axis detect failed:", e)
+                    if ln:
+                        hot["axis_%s_%s" % (k_, tag)] = ln
+                    print("  axis_%s_%s:" % (k_, tag), ln)
+
         key(0x1B)  # Esc — clear selection
         time.sleep(0.3)
         grab(hwnd, "13-final", out_dir)
 
         # objective PiP check: 13-final is the known-good state.
         # cell a inside 10/11/12 must match it inside the inset rect
-        # and the source-box area (selection outlines may differ, so
-        # shrink each region by 4 px) — fail loudly otherwise
+        # and the lower-left of the photo (selection outlines may differ,
+        # so shrink each region by 4 px) — fail loudly otherwise
         if cr:
             import numpy as np
             from PIL import Image
             i13 = np.asarray(Image.open(os.path.join(
                 out_dir, "13-final.png")).convert("RGB"), dtype=np.int16)
-            ca = cells_px["a"]
-            ix0 = int(ca[0] + ca[2] * .58) + 4
-            iy0 = int(ca[1] + ca[3] * .05) + 4
-            ix1 = int(ca[0] + ca[2] * .96) - 4
-            iy1 = int(ca[1] + ca[3] * .47) - 4
+            kk = stage_k(i13)
+            ca = [v * kk for v in cells_px["a"]]
+            px_, py_, pw_, ph_ = PIP_RECT
+            ix0 = int(ca[0] + ca[2] * px_) + 4
+            iy0 = int(ca[1] + ca[3] * py_) + 4
+            ix1 = int(ca[0] + ca[2] * (px_ + pw_)) - 4
+            iy1 = int(ca[1] + ca[3] * (py_ + ph_)) - 4
             sx0 = int(ca[0] + ca[2] * .30) + 4
             sx1 = int(ca[0] + ca[2] * .60) - 4
             sy0 = int(ca[1] + ca[3] * .55) + 4
@@ -978,6 +1046,23 @@ def main():
                     break
             print("  candidates:", tops)
             if pe:
+                # Autofit worksheet columns (double-click each header's
+                # right divider; QTableView resizes to contents) so values
+                # like 0.15 aren't cut to "0." in the screenshot. Rightmost
+                # first, so earlier dividers don't move.
+                try:
+                    foreground(pe[0])
+                    heads = [e for e in uia_dump(pe[0])
+                             if e["type"] == "HeaderItem" and e["w"] > 20
+                             and re.match(r"^[A-Z]+\s*\(", e["name"] or "")]
+                    for e in sorted(heads, key=lambda e: -e["x"]):
+                        click(e["x"] + e["w"] - 1, e["y"] + e["h"] / 2,
+                              dbl=True)
+                        time.sleep(0.25)
+                    print("  autofit %d worksheet columns" % len(heads))
+                    time.sleep(0.4)
+                except Exception as e:
+                    print("  !! column autofit skipped:", e)
                 img = shot_printwindow(pe[0]) or shot_grab()
                 img = trim_black(img)
                 img.save(os.path.join(out_dir, "plot-editor.png"))
@@ -1078,12 +1163,19 @@ def main():
                      hot["cell_" + k_][1] + hot["cell_" + k_][3]],
                     outline="lime", width=3)
             ca = hot["cell_a"]
-            hot["pip_inset"] = [int(ca[0] + ca[2] * .58),
-                                int(ca[1] + ca[3] * .05),
-                                int(ca[2] * .38), int(ca[3] * .42)]
-            pi = hot["pip_inset"]
-            dr.rectangle([pi[0], pi[1], pi[0] + pi[2], pi[1] + pi[3]],
-                         outline="yellow", width=3)
+            hot["pip_inset"] = [int(ca[0] + ca[2] * PIP_RECT[0]),
+                                int(ca[1] + ca[3] * PIP_RECT[1]),
+                                int(ca[2] * PIP_RECT[2]),
+                                int(ca[3] * PIP_RECT[3])]
+            # same geometry as CellItem._pip_zone_rect (1.5 mm margin)
+            mm = page_px[2] / float((res.get("page_mm") or {}).get("w", 210.0))
+            hot["pip_zone"] = [round(ca[0] + ca[2] * .70 - 1.5 * mm, 1),
+                               round(ca[1] + 1.5 * mm, 1),
+                               round(ca[2] * .30, 1), round(ca[3] * .22, 1)]
+            for nm, col in (("pip_inset", "yellow"), ("pip_zone", "cyan")):
+                pi = hot[nm]
+                dr.rectangle([pi[0], pi[1], pi[0] + pi[2], pi[1] + pi[3]],
+                             outline=col, width=3)
         if "scale_bar_chk" not in hot:
             for e in elems:
                 if e["type"] == "CheckBox" and any(
